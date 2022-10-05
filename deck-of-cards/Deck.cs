@@ -4,10 +4,10 @@ class Deck {
     // The 4 different valid suits in a 52 deck of cards
     List<string> suits = new List<string> { "heart", "diamond", "spade", "club" };
 
+    int cardCountPerSuit = 13;
+
     // Used for getting random cards from the deck
     Random generator = new Random();
-
-    int cardCountPerSuit = 13;
 
     public List<Card> Cards = new List<Card>();
 
