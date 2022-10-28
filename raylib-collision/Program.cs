@@ -10,11 +10,13 @@ namespace HelloWorld
 
             var ScreenHeight = 480;
             var ScreenWidth = 800;
-            var BallPosition = new Vector2(ScreenHeight / 2, ScreenWidth / 2);
-            var BallMovementSpeed = 4;
-            float BallRadius = 50;
+            var RectangleSize = 50;
 
-            Raylib.InitWindow(ScreenHeight, ScreenWidth, "Ball");
+            var PlayerRectangle = new Rectangle(ScreenWidth - (RectangleSize * 2), ScreenHeight - (RectangleSize * 2), RectangleSize, RectangleSize);
+            var TargetRectangle = new Rectangle(100, 100, RectangleSize, RectangleSize);
+            var MovementSpeed = 4;
+
+            Raylib.InitWindow(ScreenWidth, ScreenHeight, "Ball");
             Raylib.SetTargetFPS(60);
 
             while (!Raylib.WindowShouldClose())
@@ -22,25 +24,30 @@ namespace HelloWorld
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.WHITE);
 
-                Raylib.DrawText("Move the ball with the arrow keys!", 12, 12, 20, Color.BLACK);
+                Raylib.DrawText("Move the red square to the blue square with the arrow keys!", 12, 12, 20, Color.BLACK);
 
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)) {
-                    BallPosition.X += BallMovementSpeed;
+                    PlayerRectangle.x += MovementSpeed;
                 }
 
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)) {
-                    BallPosition.X -= BallMovementSpeed;
+                    PlayerRectangle.x -= MovementSpeed;
                 }
 
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_UP)) {
-                    BallPosition.Y -= BallMovementSpeed;
+                    PlayerRectangle.y -= MovementSpeed;
                 }
 
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN)) {
-                    BallPosition.Y  += BallMovementSpeed;
+                    PlayerRectangle.y += MovementSpeed;
                 }
 
-                Raylib.DrawCircleV(BallPosition, BallRadius, Color.MAROON);
+                Raylib.DrawRectangleRec(TargetRectangle, Color.BLUE);
+                Raylib.DrawRectangleRec(PlayerRectangle, Color.RED);
+
+                if (Raylib.CheckCollisionRecs(PlayerRectangle, TargetRectangle)) {
+                    Raylib.DrawText("You did it!!!!", 12, 34, 20, Color.BLACK);
+                }
 
                 Raylib.EndDrawing();
             }
