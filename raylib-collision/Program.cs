@@ -16,7 +16,7 @@ namespace HelloWorld
             var TargetRectangle = new Rectangle(100, 100, RectangleSize, RectangleSize);
             var MovementSpeed = 4;
 
-            Raylib.InitWindow(ScreenWidth, ScreenHeight, "Ball");
+            Raylib.InitWindow(ScreenWidth, ScreenHeight, "Collision");
             Raylib.SetTargetFPS(60);
 
             while (!Raylib.WindowShouldClose())
